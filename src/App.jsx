@@ -37,8 +37,7 @@ const App = () => {
             todo
           </h1>
           <button>
-            {" "}
-            <MoonIcon />{" "}
+            <MoonIcon />
           </button>
         </div>
         <form className="mt-8 flex items-center gap-4 overflow-hidden rounded-md bg-white px-4 py-4">

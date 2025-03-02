@@ -1,0 +1,33 @@
+Curso React y Next.js: Aprende Frontend y Backend FullStack
+ https://www.udemy.com/course/curso-react-js/learn/lecture/35312250#notes
+https://bluuweb.dev/
+https://www.youtube.com/bluuweb
+ npm create vite@latest .   // para crear la base del proyecto dentro de la carpeta
+ npm i // para instalar todos los paquetes asociados al archivo package.json 
+       // y crear la carpeta node_modules
+
+ npm run dev
+
+ code .  // Para abrir el proyecto desde el Visual Studio Code
+
+ Para instalar Tailwindcss
+ https://tailwindcss.com/docs/installation/using-vite
+ npm install tailwindcss @tailwindcss/vite
+
+// Para ordenar las clases de tailwindcss
+ npm install -D prettier prettier-plugin-tailwindcss
+
+ 
+ - Trabajo con Git
+ git init
+ git add .
+ git log --oneline
+ git commit -m "hasta el 34:Recorrer elementos con map"
+ git branch -M main
+ git push -u origin main  // para actualizar al gitHub
+
+// para subir a github
+ git remote add origin http://github.com/RogerBatistaCaceres/****.git
+ git branch -M main
+ git push -u origin main
+ 

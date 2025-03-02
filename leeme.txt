@@ -15,6 +15,7 @@ https://www.youtube.com/bluuweb
  npm install tailwindcss @tailwindcss/vite
 
 // Para ordenar las clases de tailwindcss
+// https://www.youtube.com/watch?v=RxfItbRhnrk
  npm install -D prettier prettier-plugin-tailwindcss
 
  

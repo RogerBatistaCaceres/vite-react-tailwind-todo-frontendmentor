@@ -1,7 +1,92 @@
-import CrossIcon from "./components/icons/CrossIcon.jsx";
-import MoonIcon from "./components/icons/MoonIcon.jsx";
+import { useState } from "react";
+import Header from "./components/Header.jsx";
+import TodoComputed from "./components/TodoComputed.jsx";
+import TodoCreate from "./components/TodoCreate.jsx";
+import TodoFilter from "./components/TodoFilter.jsx";
+import TodoList from "./components/TodoList.jsx";
+
+// Esta lista es una array[] que dentro va a tener objetos{},
+const initialStateTodos = [
+  { id: 1, title: "Complete online Javascript bluuweb Curse", completed: true },
+  { id: 2, title: "Go to the gym", completed: false },
+  { id: 3, title: "10 minutes meditation", completed: false },
+  { id: 4, title: "Pick up groceries", completed: true },
+  { id: 5, title: "Complete todo app on Frontend Mentor", completed: false },
+];
 
 const App = () => {
+  const [todos, setTodos] = useState(initialStateTodos);
+
+  const createTodo = (title) => {
+    // creo un nuevo objeto para adicionarlo a la lista de todos
+    const newTodo = {
+      id: Date.now(),
+      // title: title.trim(),
+      title,
+      completed: false,
+    };
+    // hago la clonación (copia) de los "todos", que ya existen
+    // con la expresión "...todos" (comando spread) y lo adiciono
+    // a esa copia del array usando la expresión [ele,ele1]
+    // y llamo al la función setTodos para que me renderee los
+    // elementos que cambien esa variable.
+    setTodos([...todos, newTodo]);
+  };
+
+  const removeTodo = (id) => {
+    // La función filter devuelve todos los elementos que cumplan
+    // la condición señalada.. por eso devuelve todos los
+    // elementos que no tienen el id, y el del id lo quita de la lista
+    // de "Todos"
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const updateTodo = (id) => {
+    // Cuando le pasemos un id y ese id sea igual al id del de la lista
+    // entonces me va a devolver un objeto que es la copia del todo
+    // pero con la propiedad completado invertida, en caso contrario devuelve el "todo"
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    );
+  };
+
+  const computedItemsLeft = todos.filter((todo) => !todo.completed).length;
+
+  const clearCompleted = () => {
+    setTodos(todos.filter((todo) => !todo.completed));
+  };
+
+  const [filter, setFilter] = useState("all");
+
+  const changeFilter = (filter) => setFilter(filter);
+
+  /*
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "all") {
+      return true;
+    } else if (filter === "active") {
+      return !todo.completed;
+    } else if (filter === "completed") {
+      return todo.completed;
+    }
+  });
+  */
+  const filteredTodos = () => {
+    // El filter lo tengo del useState
+    switch (filter) {
+      case "all":
+        return todos;
+      case "active":
+        return todos.filter((todo) => !todo.completed);
+      case "completed":
+        return todos.filter((todo) => todo.completed);
+      default:
+        return todos;
+    }
+  };
+
   return (
     // Empezamos a poner las clases de tailwindccs... poner una imagen de background y que no se repita
     // bg-cover es para que cubra toda la página
@@ -19,6 +104,8 @@ const App = () => {
     //  si usamos los corchetes es para espeficicar un tamaño personalizado a la separación entre las letras
     //  lo común es no usarlo, solo si es necesario.
     // rounded-md: es para redondear los bordes del input
+    // rounded-t-md: es para redondear los bordes pero del Top
+    // rounded-b-md: es para redondear los bordes pero del Botton
     // overflow-hidden: Esto hace que el contenido no se escape de su contenedor... y que el input del
     // create todo respete el redondeado.
     // py-4: paddin arriba y abajo, por las y de -4
@@ -31,67 +118,29 @@ const App = () => {
     // flex-none: es para que esos elementos no crezcan, que solo crezca el que tiene grow
     // hover: te pone el color cuando se pasa por arriba del botón
     <div className="min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat">
-      <header className="container mx-auto px-4 pt-8">
-        <div className="flex justify-between">
-          <h1 className="text-3xl font-semibold tracking-[0.3em] text-white uppercase">
-            todo
-          </h1>
-          <button>
-            <MoonIcon />
-          </button>
-        </div>
-        <form className="mt-8 flex items-center gap-4 overflow-hidden rounded-md bg-white px-4 py-4">
-          <span className="board inline-block h-5 w-5 rounded-full border-2"></span>
-          <input
-            type="text"
-            placeholder="Create a new todo..."
-            className="text-gray w-full text-gray-400 outline-none"
-          />
-        </form>
-      </header>
+      <Header />
       <main className="container mx-auto mt-8 px-4">
-        <div className="rounded-md bg-white">
-          <article className="flex gap-4 border-b border-b-gray-400 px-4 py-4">
-            <button className="board inline-block h-5 w-5 flex-none rounded-full border-2"></button>
-            <p className="grow text-gray-600">
-              Complete online Javascript curse en bluuweb
-            </p>
-            <button className="flex-none">
-              <CrossIcon />
-            </button>
-          </article>
-          <article className="flex gap-4 border-b border-b-gray-400 px-4 py-4">
-            <button className="board inline-block h-5 w-5 flex-none rounded-full border-2"></button>
-            <p className="grow text-gray-600">
-              Complete online Javascript curse en bluuweb
-            </p>
-            <button className="flex-none">
-              <CrossIcon />
-            </button>
-          </article>
-          <article className="flex gap-4 border-b border-b-gray-400 px-4 py-4">
-            <button className="board inline-block h-5 w-5 flex-none rounded-full border-2"></button>
-            <p className="grow text-gray-600">
-              Complete online Javascript curse en bluuweb
-            </p>
-            <button className="flex-none">
-              <CrossIcon />
-            </button>
-          </article>
-          <section className="flex justify-between px-4 py-4">
-            <span className="text-gray-400">5 item left</span>
-            <button className="text-gray-400">Clear Completed</button>
-          </section>
-        </div>
+        <TodoCreate createTodo={createTodo} />
+
+        <TodoList
+          todos={filteredTodos()}
+          removeTodo={removeTodo}
+          updateTodo={updateTodo}
+        />
+        {/* Lo paso directamente sin función flecha para que se ejecute */}
+        {/* directamente, y en el componente solo tengo que pintar el resultado  */}
+        {/* que es un número  */}
+        <TodoComputed
+          computedItemsLeft={computedItemsLeft}
+          clearCompleted={clearCompleted}
+        />
+
+        <TodoFilter changeFilter={changeFilter} filter={filter} />
       </main>
-      <section className="container mx-auto mt-8 px-4">
-        <div className="flex justify-center gap-4 rounded-md bg-white p-4">
-          <button className="text-blue-600">All</button>
-          <button className="hover:text-blue-600">Active</button>
-          <button className="hover:text-blue-600">Completed</button>
-        </div>
-      </section>
-      <p className="mt-8 text-center"> Drag and Drop to reorder list</p>
+
+      <footer className="mt-8 text-center">
+        Drag and Drop to reorder list
+      </footer>
     </div>
   );
 };

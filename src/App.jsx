@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header.jsx";
 import TodoComputed from "./components/TodoComputed.jsx";
 import TodoCreate from "./components/TodoCreate.jsx";
@@ -6,16 +6,27 @@ import TodoFilter from "./components/TodoFilter.jsx";
 import TodoList from "./components/TodoList.jsx";
 
 // Esta lista es una array[] que dentro va a tener objetos{},
-const initialStateTodos = [
-  { id: 1, title: "Complete online Javascript bluuweb Curse", completed: true },
-  { id: 2, title: "Go to the gym", completed: false },
-  { id: 3, title: "10 minutes meditation", completed: false },
-  { id: 4, title: "Pick up groceries", completed: true },
-  { id: 5, title: "Complete todo app on Frontend Mentor", completed: false },
-];
+// const initialStateTodos = [
+//   { id: 1, title: "Complete online Javascript bluuweb Curse", completed: true },
+//   { id: 2, title: "Go to the gym", completed: false },
+//   { id: 3, title: "10 minutes meditation", completed: false },
+//   { id: 4, title: "Pick up groceries", completed: true },
+//   { id: 5, title: "Complete todo app on Frontend Mentor", completed: false },
+// ];
 
+// Leo  los "todos" del localStorage si existen de lo contrario devuelve un arreglo vacío
+const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || [];
 const App = () => {
   const [todos, setTodos] = useState(initialStateTodos);
+
+  // Cada vez que cambie algo en los todos se va a ejecutar el useEffect
+  useEffect(() => {
+    // console.log("todos");
+    // Guardo en el local Store los todos en formato JSON
+    // Todo lo que se  guarda en el localStore es un string
+    // convertimos ese array de todos en formato JSON que es un string
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const createTodo = (title) => {
     // creo un nuevo objeto para adicionarlo a la lista de todos
@@ -117,9 +128,11 @@ const App = () => {
     // flex grow: hace que los elementos traten de crecer lo máximo posible.
     // flex-none: es para que esos elementos no crezcan, que solo crezca el que tiene grow
     // hover: te pone el color cuando se pasa por arriba del botón
-    <div className="min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')]">
+    // Los breakPoint en tailwind sm,md,lg ... podemos decirle que en md: se comporte de una forma, que esa imagen cambie...
+    // md:max-w-xl Hace que en tamaño md, los elementos internos no crezcan que tengan un max width de xl pixels segun tailwind
+    <div className="min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat md:bg-[url('./assets/images/bg-desktop-light.jpg')] dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')] md:dark:bg-[url('./assets/images/bg-desktop-dark.jpg')]">
       <Header />
-      <main className="container mx-auto mt-8 px-4">
+      <main className="container mx-auto mt-8 px-4 md:max-w-xl">
         <TodoCreate createTodo={createTodo} />
 
         <TodoList

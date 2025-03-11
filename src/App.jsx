@@ -117,7 +117,7 @@ const App = () => {
     // flex grow: hace que los elementos traten de crecer lo máximo posible.
     // flex-none: es para que esos elementos no crezcan, que solo crezca el que tiene grow
     // hover: te pone el color cuando se pasa por arriba del botón
-    <div className="min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat">
+    <div className="min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')]">
       <Header />
       <main className="container mx-auto mt-8 px-4">
         <TodoCreate createTodo={createTodo} />
@@ -138,7 +138,7 @@ const App = () => {
         <TodoFilter changeFilter={changeFilter} filter={filter} />
       </main>
 
-      <footer className="mt-8 text-center">
+      <footer className="mt-8 text-center dark:text-gray-400">
         Drag and Drop to reorder list
       </footer>
     </div>

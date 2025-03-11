@@ -1,4 +1,4 @@
-const CrossIcon = ({ fill = "#494C6B", ...props }) => {
+const IconCross = ({ fill = "#494C6B", ...props }) => {
   return (
     <svg
       {...props}
@@ -15,4 +15,4 @@ const CrossIcon = ({ fill = "#494C6B", ...props }) => {
   );
 };
 
-export default CrossIcon;
+export default IconCross;

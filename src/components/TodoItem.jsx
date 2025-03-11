@@ -3,9 +3,12 @@ import CrossIcon from "./icons/IconCross";
 
 const TodoItem = ({ todo, removeTodo, updateTodo }) => {
   // se puede hacer la desestructuración y llamar directamente a las propiedades del todo
+  // dark:bg-gray-800, hace que se tenga en cuenta cuando la aplicación está en modo dark
+  // para emular el modo Hacer Ctrl+Shift+P en visual studio code
+  // y buscar Emulate CSS prefers-color-scheme:light/dark
   const { id, title, completed } = todo;
   return (
-    <article className="flex gap-4 border-b border-b-gray-400">
+    <article className="flex gap-4 border-b border-b-gray-400 dark:bg-gray-800">
       {/* Este es el botón sim clickear
       <button className="inline-block h-5 w-5 flex-none rounded-full border-2">
         <IconCheck></IconCheck>
@@ -36,7 +39,7 @@ const TodoItem = ({ todo, removeTodo, updateTodo }) => {
       {/* por lo que podemos dejarlas fuera que siempre se ejecuten*/}
       {/* esté o no esté la variable completed en true*/}
       <button
-        className={`h-5 w-5 flex-none rounded-full border-2 ${completed ? "grid place-items-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" : "inline-block"}`}
+        className={`h-5 w-5 flex-none rounded-full border-2 border-gray-400 ${completed ? "grid place-items-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" : "inline-block"}`}
         // hay que pasarlo como función de flecha, porque de lo contrario
         // se ejecuta cuando se refresh la primera vez
         onClick={() => {
@@ -55,7 +58,9 @@ const TodoItem = ({ todo, removeTodo, updateTodo }) => {
       {/* https://www.creative-tim.com/twcomponents/cheatsheet*/}
       {/* buscando el text decoration, clase line-through*/}
 
-      <p className={`grow text-gray-600 ${completed && "line-through"}`}>
+      <p
+        className={`grow text-gray-600 dark:text-gray-400 ${completed && "line-through"}`}
+      >
         {title}
       </p>
       <button

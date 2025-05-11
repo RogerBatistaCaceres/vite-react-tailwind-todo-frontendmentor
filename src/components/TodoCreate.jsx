@@ -41,13 +41,13 @@ const TodoCreate = ({ createTodo }) => {
       // en la función que le hemos pasado, en este caso
       // handleSubmitAddTodo
       onSubmit={handleSubmitAddTodo}
-      className="flex items-center gap-4 overflow-hidden rounded-md bg-white px-4 py-4 dark:bg-gray-800"
+      className="flex items-center gap-4 overflow-hidden rounded-md bg-white px-4 py-4 transition-all duration-1000 dark:bg-gray-800"
     >
-      <span className="board inline-block h-5 w-5 rounded-full border-2 border-gray-400"></span>
+      <span className="inline-block h-5 w-5 rounded-full border-2 border-gray-400"></span>
       <input
         type="text"
         placeholder="Create a new todo..."
-        className="w-full text-gray-400 outline-none dark:bg-gray-800"
+        className="w-full bg-white text-gray-400 transition-all duration-1000 outline-none dark:bg-gray-800"
         value={title}
         // Este onChange va a estar pendiente de cada pulsación
         // del teclado, de cada click..

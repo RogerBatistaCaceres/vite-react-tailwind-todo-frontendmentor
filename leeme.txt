@@ -3,16 +3,32 @@ Curso React y Next.js: Aprende Frontend y Backend FullStack
 https://bluuweb.dev/
 https://www.youtube.com/bluuweb
  npm create vite@latest .   // para crear la base del proyecto dentro de la carpeta
- npm i // para instalar todos los paquetes asociados al archivo package.json 
+ npm i // npm install//  para instalar todos los paquetes asociados al archivo package.json 
        // y crear la carpeta node_modules
 
  npm run dev
 
  code .  // Para abrir el proyecto desde el Visual Studio Code
 
- Para instalar Tailwindcss
- https://tailwindcss.com/docs/installation/using-vite
- npm install tailwindcss @tailwindcss/vite
+ Para instalar Tailwindcss v4
+1 - npm install tailwindcss @tailwindcss/vite
+
+2 -Poner en el archivo vite.config.js lo siguiente:
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+})
+
+3 - Poner en el archivo index.css lo siguiente:
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *))
 
 // Para ordenar las clases de tailwindcss
 // https://www.youtube.com/watch?v=RxfItbRhnrk

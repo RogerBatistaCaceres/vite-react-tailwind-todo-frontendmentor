@@ -8,7 +8,7 @@ const TodoList = ({ todos, removeTodo, updateTodo }) => {
     // padding por las x y padding por las y.
     // overflow-hidden: clase que obliga a que no se desbordara
     // los elementos internos al elemento padre.
-    <div className="dark:bg-gray800 mt-8 overflow-hidden rounded-t-md bg-white [&>article]:p-4">
+    <div className="mt-8 overflow-hidden rounded-t-md bg-white transition-all duration-1000 dark:bg-gray-800 [&>article]:p-4">
       {todos.map((todo) => (
         <TodoItem
           key={todo.id}

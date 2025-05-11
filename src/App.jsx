@@ -130,7 +130,7 @@ const App = () => {
     // hover: te pone el color cuando se pasa por arriba del botón
     // Los breakPoint en tailwind sm,md,lg ... podemos decirle que en md: se comporte de una forma, que esa imagen cambie...
     // md:max-w-xl Hace que en tamaño md, los elementos internos no crezcan que tengan un max width de xl pixels segun tailwind
-    <div className="min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat md:bg-[url('./assets/images/bg-desktop-light.jpg')] dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')] md:dark:bg-[url('./assets/images/bg-desktop-dark.jpg')]">
+    <div className="min-h-screen bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat transition-all duration-1000 md:bg-[url('./assets/images/bg-desktop-light.jpg')] dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')] md:dark:bg-[url('./assets/images/bg-desktop-dark.jpg')]">
       <Header />
       <main className="container mx-auto mt-8 px-4 md:max-w-xl">
         <TodoCreate createTodo={createTodo} />
@@ -151,7 +151,7 @@ const App = () => {
         <TodoFilter changeFilter={changeFilter} filter={filter} />
       </main>
 
-      <footer className="mt-8 text-center dark:text-gray-400">
+      <footer className="mt-8 text-center transition-all duration-1000 dark:text-gray-400">
         Drag and Drop to reorder list
       </footer>
     </div>

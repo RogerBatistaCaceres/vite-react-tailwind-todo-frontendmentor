@@ -53,5 +53,8 @@ export default defineConfig({
  https://netlify.com/
 
  https://aesthetic-biscotti-3501eb.netlify.app/
+
+
+ *********** Me he quedado en el curso Sección 8:Bonus Drag and Drop (119)
  
 

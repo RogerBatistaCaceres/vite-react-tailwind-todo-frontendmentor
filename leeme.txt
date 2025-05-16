@@ -52,7 +52,7 @@ export default defineConfig({
  subido a netlify
  https://netlify.com/
 
- https://aesthetic-biscotti-3501eb.netlify.app/
+ https://todos-dnd-react.netlify.app
 
 
  

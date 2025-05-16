@@ -1,3 +1,4 @@
+import { DragDropContext } from "@hello-pangea/dnd";
 import { useEffect, useState } from "react";
 import Header from "./components/Header.jsx";
 import TodoComputed from "./components/TodoComputed.jsx";
@@ -16,6 +17,13 @@ import TodoList from "./components/TodoList.jsx";
 
 // Leo  los "todos" del localStorage si existen de lo contrario devuelve un arreglo vacío
 const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || [];
+const reorder = (list, startIndex, endIndex) => {
+  const result = [...list];
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+  return result;
+};
+
 const App = () => {
   const [todos, setTodos] = useState(initialStateTodos);
 
@@ -98,6 +106,19 @@ const App = () => {
     }
   };
 
+  const handleDragEnd = (result) => {
+    const { destination, source } = result;
+    if (!destination) return;
+    if (
+      source.index === destination.index &&
+      source.droppableId === destination.droppableId
+    )
+      return;
+    setTodos((prevTasks) =>
+      reorder(prevTasks, source.index, destination.index),
+    );
+  };
+
   return (
     // Empezamos a poner las clases de tailwindccs... poner una imagen de background y que no se repita
     // bg-cover es para que cubra toda la página
@@ -134,12 +155,13 @@ const App = () => {
       <Header />
       <main className="container mx-auto mt-8 px-4 md:max-w-xl">
         <TodoCreate createTodo={createTodo} />
-
-        <TodoList
-          todos={filteredTodos()}
-          removeTodo={removeTodo}
-          updateTodo={updateTodo}
-        />
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <TodoList
+            todos={filteredTodos()}
+            removeTodo={removeTodo}
+            updateTodo={updateTodo}
+          />
+        </DragDropContext>
         {/* Lo paso directamente sin función flecha para que se ejecute */}
         {/* directamente, y en el componente solo tengo que pintar el resultado  */}
         {/* que es un número  */}
